@@ -1,7 +1,7 @@
-import express from 'express';
-//import { urlencoded, json } from 'body-parser';
+const express = require('express');
 
-import { APIrouter } from 'API';
+
+const APIrouter = require('./API').router;
 
 // parse application/x-www-form-urlencoded
 //const urlParser = urlencoded({ extended: false });

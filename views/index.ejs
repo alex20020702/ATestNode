@@ -18,10 +18,26 @@
         </menu>
         <main>
             <table>
-                <% list.array.forEach(element => { %>
-                <tr><td><%= x.fullName %></td><td><%= x.email %></td></tr>
-                <% }); %> 
+                <% list.forEach(x => { %>
+                <tr>
+                    <td><%= x.fullName %></td>
+                    <td><%= x.email %></td>
+                    <td>
+                        <form method="POST" action="/users/update">
+                            <input value=<%= x._id %> name="_id" readonly>
+                            <input type="text" name="fullName" placeholder="New name">
+                            <input type="submit" value="Update">
+                        </form>
+                    </td>
+                </tr>
+                <% }); %>
             </table>
+            <hr>
+            <form method="POST" action="/users/new">
+                <input type="text" name="fullName" placeholder="New name">
+                <input type="email" name="email" placeholder="New email">
+                <input type="submit" value="Create">
+            </form>
         </main>
     </div>
 </body>

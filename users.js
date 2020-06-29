@@ -1,5 +1,5 @@
-import { MongoClient, ObjectId } from 'mongodb';
-import { config } from 'dotenv';
+const { MongoClient, ObjectId } = require ( 'mongodb' );
+const { config } = require ( 'dotenv' );
 config();
 
 const users = {};
@@ -51,4 +51,4 @@ users.update = async function (param, newValue, callback) {
 	});
 };
 
-export default users;
+module.exports = users;

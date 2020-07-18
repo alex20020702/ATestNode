@@ -1,13 +1,24 @@
 const { Router } = require('express');
 const bodyparser = require('body-parser');
 const users = require('./users.js');
+
+const validator = require('./validation.js').userAPI;
+const validate = (req, res, next) => {
+	const { value, error } = validator.validate(req.body);
+	if(error){
+		res.send(error);
+		return;
+	}
+	req.body = value;
+	next();
+};
+
 const router = new Router();
 
-console.log(bodyparser.json());
 router.use(bodyparser.json());
 router.use(bodyparser.urlencoded({ extended: true }));
 
-router.post('/new', (req, res) => {
+router.post('/new', validate, (req, res) => {
 	try {
 		users.add(req.body.fullName, req.body.email);
 		//res.send( { 'fullName': req.body.fullName, 'email': req.body.email });
@@ -27,7 +38,7 @@ router.get('/', (req, res) => {
 		res.send(`{ "Error": "${err}" }`);
 	}
 });
-router.post('/update', (req, res) => {
+router.post('/update', validate, (req, res) => {
 	try {
 		users.update({ _id: req.body._id }, { fullName: req.body.fullName }, (result) => {
 			console.log(JSON.stringify(result));

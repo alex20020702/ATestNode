@@ -1,7 +1,7 @@
 const express = require('express');
 
 
-const APIrouter = require('./API').router;
+const APIrouter = require('./scripts/API.js').router;
 
 // parse application/x-www-form-urlencoded
 //const urlParser = urlencoded({ extended: false });
